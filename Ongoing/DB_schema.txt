@@ -1,0 +1,22 @@
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    user_name VARCHAR(200) NOT NULL,
+	email VARCHAR(200)UNIQUE NOT NULL,
+    password VARCHAR(200)NOT NULL,
+	products int
+);
+
+SELECT setval('users_user_id_seq', 999);
+
+CREATE TABLE products (
+  product_id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT NOT NULL,
+  price DECIMAL(10, 2) NOT NULL,
+  image_path VARCHAR(255),
+  uid INT REFERENCES users(user_id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+SELECT setval('products_product_id_seq', 999);
